@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AdamOne Edu — Wkrótce · Coming Soon</title>
+  <meta name="description" content="AdamOne Edu — cyfrowe centrum edukacji. Oficjalna strona już wkrótce. / AdamOne Edu — a digital-first education centre. Official website coming soon." />
+  <meta property="og:title" content="AdamOne Edu — Wkrótce · Coming Soon" />
+  <meta property="og:description" content="Cyfrowe centrum edukacji. Oficjalna strona już wkrótce. / A digital-first education centre. Official website coming soon." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://adamone.edu.pl/" />
+  <meta name="theme-color" content="#F0F7F9" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    :root {
+      /* Brand palette */
+      --trust-blue: #1c569b;
+      --digital-cyan: #49aef7;
+      --vivid-teal: #00bfa6;
+      --bg-light: #f0f7f9;
+      --midnight: #021027;
+
+      /* Derived */
+      --ink: var(--midnight);
+      --ink-soft: rgba(2, 16, 39, 0.64);
+      --ink-faint: rgba(2, 16, 39, 0.4);
+      --line: rgba(28, 86, 155, 0.16);
+      --surface: rgba(255, 255, 255, 0.62);
+
+      /* Type scale */
+      --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      --step-0: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);
+      --step-1: clamp(1.15rem, 1.05rem + 0.6vw, 1.4rem);
+      --step-3: clamp(2.2rem, 1.4rem + 4.4vw, 4.6rem);
+
+      --radius: 18px;
+      --dur: 600ms;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      font-size: var(--step-0);
+      line-height: 1.6;
+      color: var(--ink);
+      background-color: var(--bg-light);
+      min-height: 100svh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    ::selection { background: var(--vivid-teal); color: #fff; }
+
+    a { color: var(--trust-blue); }
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--digital-cyan);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    .page {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      isolation: isolate;
+    }
+
+    /* ---------- Ambient background ---------- */
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.55;
+      will-change: transform;
+    }
+    .orb--cyan {
+      width: 46vmax; height: 46vmax;
+      top: -18vmax; right: -12vmax;
+      background: radial-gradient(circle at 30% 30%, var(--digital-cyan), transparent 70%);
+      animation: drift-a 26s ease-in-out infinite alternate;
+    }
+    .orb--teal {
+      width: 40vmax; height: 40vmax;
+      bottom: -16vmax; left: -10vmax;
+      background: radial-gradient(circle at 60% 40%, var(--vivid-teal), transparent 72%);
+      animation: drift-b 32s ease-in-out infinite alternate;
+    }
+    .orb--blue {
+      width: 34vmax; height: 34vmax;
+      top: 30%; left: 42%;
+      opacity: 0.28;
+      background: radial-gradient(circle at 50% 50%, var(--trust-blue), transparent 74%);
+      animation: drift-a 38s ease-in-out infinite alternate-reverse;
+    }
+    @keyframes drift-a {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to   { transform: translate3d(-4vmax, 3vmax, 0) scale(1.08); }
+    }
+    @keyframes drift-b {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to   { transform: translate3d(3vmax, -3vmax, 0) scale(1.05); }
+    }
+
+    /* faint horizon line for depth */
+    .ambient::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, transparent 62%, rgba(2, 16, 39, 0.035) 100%);
+    }
+
+    /* ---------- Layout shells ---------- */
+    .shell {
+      width: min(1080px, 92vw);
+      margin-inline: auto;
+    }
+
+    /* ---------- Header ---------- */
+    .site-head {
+      padding-block: clamp(1.4rem, 2.5vh, 2.2rem);
+    }
+    .site-head .shell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: inherit;
+    }
+    .brand__mark {
+      width: 44px; height: 44px;
+      flex: none;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--trust-blue), var(--digital-cyan));
+      box-shadow: 0 6px 18px rgba(28, 86, 155, 0.28);
+    }
+    .brand__name {
+      font-family: var(--font-display);
+      font-size: var(--step-1);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      line-height: 1;
+    }
+    .brand__name .edu { color: var(--trust-blue); font-style: italic; }
+
+    .lang {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 0.9rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--surface);
+      backdrop-filter: blur(6px);
+    }
+    .lang .sep { color: var(--vivid-teal); }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      flex: 1;
+      display: grid;
+      place-items: center;
+      padding-block: clamp(2rem, 6vh, 5rem);
+    }
+    .hero__inner {
+      text-align: center;
+      max-width: 62rem;
+      margin-inline: auto;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      backdrop-filter: blur(8px);
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      color: var(--trust-blue);
+      text-transform: uppercase;
+    }
+    .status .dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: var(--vivid-teal);
+      box-shadow: 0 0 0 0 rgba(0, 191, 166, 0.5);
+      animation: pulse 2.2s var(--ease) infinite;
+    }
+    @keyframes pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(0, 191, 166, 0.45); }
+      70%  { box-shadow: 0 0 0 11px rgba(0, 191, 166, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 191, 166, 0); }
+    }
+
+    .headline {
+      margin-top: clamp(1.6rem, 3.5vh, 2.6rem);
+    }
+    .headline h1 {
+      font-family: var(--font-display);
+      font-weight: 600;
+      font-size: var(--step-3);
+      line-height: 1.02;
+      letter-spacing: -0.015em;
+      color: var(--midnight);
+      text-wrap: balance;
+    }
+    .headline h1 .accent {
+      font-style: italic;
+      background: linear-gradient(100deg, var(--trust-blue), var(--vivid-teal));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .headline .en-sub {
+      margin-top: 0.9rem;
+      font-size: var(--step-1);
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      color: var(--ink-soft);
+    }
+
+    .rule {
+      width: 84px; height: 3px;
+      margin: clamp(1.8rem, 3.5vh, 2.6rem) auto;
+      border-radius: 3px;
+      background: linear-gradient(90deg, var(--trust-blue), var(--digital-cyan), var(--vivid-teal));
+    }
+
+    .lede {
+      font-size: var(--step-1);
+      line-height: 1.55;
+      color: var(--ink);
+      max-width: 46rem;
+      margin-inline: auto;
+    }
+    .lede .en {
+      display: block;
+      margin-top: 0.55rem;
+      font-size: var(--step-0);
+      font-weight: 300;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- Value trio ---------- */
+    .values {
+      margin-top: clamp(2.4rem, 5vh, 3.6rem);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      text-align: left;
+    }
+    .value {
+      position: relative;
+      padding: 1.3rem 1.35rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--surface);
+      backdrop-filter: blur(10px);
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+    }
+    .value:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 22px 40px -18px rgba(2, 16, 39, 0.22);
+      border-color: rgba(73, 174, 247, 0.4);
+    }
+    .value .bar {
+      width: 34px; height: 3px;
+      border-radius: 3px;
+      margin-bottom: 0.95rem;
+    }
+    .value:nth-child(1) .bar { background: var(--trust-blue); }
+    .value:nth-child(2) .bar { background: var(--digital-cyan); }
+    .value:nth-child(3) .bar { background: var(--vivid-teal); }
+    .value h2 {
+      font-family: var(--font-display);
+      font-size: 1.18rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--midnight);
+    }
+    .value .en {
+      margin-top: 0.3rem;
+      font-size: 0.86rem;
+      font-weight: 300;
+      color: var(--ink-soft);
+    }
+
+    /* ---------- CTA ---------- */
+    .cta {
+      margin-top: clamp(2.4rem, 5vh, 3.4rem);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.95rem 1.9rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      color: #fff;
+      background: linear-gradient(120deg, var(--trust-blue), var(--digital-cyan));
+      box-shadow: 0 12px 28px -8px rgba(28, 86, 155, 0.5);
+      transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease), filter var(--dur) var(--ease);
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      filter: saturate(1.08);
+      box-shadow: 0 18px 36px -10px rgba(28, 86, 155, 0.55);
+    }
+    .btn svg { transition: transform var(--dur) var(--ease); }
+    .btn:hover svg { transform: translateX(4px); }
+    .cta .note {
+      font-size: 0.86rem;
+      font-weight: 300;
+      color: var(--ink-faint);
+    }
+    .cta .note .en { font-style: italic; }
+
+    /* ---------- Footer ---------- */
+    .site-foot {
+      padding-block: clamp(1.4rem, 3vh, 2rem);
+      border-top: 1px solid var(--line);
+    }
+    .site-foot .shell {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: var(--ink-soft);
+    }
+    .site-foot .domain {
+      font-weight: 500;
+      color: var(--trust-blue);
+      letter-spacing: 0.02em;
+    }
+    .site-foot .en { font-weight: 300; color: var(--ink-faint); }
+
+    /* ---------- Entrance motion ---------- */
+    .rise {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise 0.9s var(--ease) forwards;
+    }
+    .rise--1 { animation-delay: 0.05s; }
+    .rise--2 { animation-delay: 0.16s; }
+    .rise--3 { animation-delay: 0.28s; }
+    .rise--4 { animation-delay: 0.4s; }
+    .rise--5 { animation-delay: 0.52s; }
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ---------- Responsive ---------- */
+    @media (max-width: 760px) {
+      .values { grid-template-columns: 1fr; }
+      .site-head .shell { flex-wrap: wrap; }
+      .site-foot .shell { flex-direction: column; text-align: center; }
+    }
+
+    /* ---------- Reduced motion ---------- */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .orb, .status .dot { animation: none; }
+      .rise { animation: none; opacity: 1; transform: none; }
+      .btn, .value, .btn svg { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <div class="ambient" aria-hidden="true">
+      <div class="orb orb--cyan"></div>
+      <div class="orb orb--blue"></div>
+      <div class="orb orb--teal"></div>
+    </div>
+
+    <header class="site-head">
+      <div class="shell">
+        <a class="brand" href="#" aria-label="AdamOne Edu — strona główna / home">
+          <span class="brand__mark" aria-hidden="true">
+            <!-- simple spark / open-book mark -->
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" role="img" aria-hidden="true">
+              <path d="M13 2 L16 10 L24 13 L16 16 L13 24 L10 16 L2 13 L10 10 Z" fill="#fff" opacity="0.95"/>
+              <circle cx="13" cy="13" r="2.4" fill="#00BFA6"/>
+            </svg>
+          </span>
+          <span class="brand__name">AdamOne <span class="edu">Edu</span></span>
+        </a>
+        <span class="lang" aria-label="Strona dwujęzyczna: polski i angielski / Bilingual page: Polish and English">
+          PL <span class="sep" aria-hidden="true">·</span> EN
+        </span>
+      </div>
+    </header>
+
+    <main class="hero">
+      <div class="hero__inner">
+        <p class="status rise rise--1">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Wkrótce · Coming&nbsp;Soon</span>
+        </p>
+
+        <div class="headline rise rise--2">
+          <h1>
+            Oficjalna strona<br />
+            <span class="accent">już wkrótce</span>
+          </h1>
+          <p class="en-sub" lang="en">Our official website is coming soon</p>
+        </div>
+
+        <div class="rule rise rise--3" aria-hidden="true"></div>
+
+        <p class="lede rise rise--3">
+          AdamOne Edu to cyfrowe centrum edukacji — miejsce, w którym wiedza
+          spotyka technologię, a nauka staje się dostępna dla każdego.
+          <span class="en" lang="en">
+            AdamOne Edu is a digital-first education centre — where knowledge
+            meets technology and learning becomes accessible to everyone.
+          </span>
+        </p>
+
+        <div class="values rise rise--4">
+          <div class="value">
+            <div class="bar" aria-hidden="true"></div>
+            <h2>Zaufanie i jakość</h2>
+            <p class="en" lang="en">Trust &amp; quality</p>
+          </div>
+          <div class="value">
+            <div class="bar" aria-hidden="true"></div>
+            <h2>Cyfrowa nauka</h2>
+            <p class="en" lang="en">Digital learning</p>
+          </div>
+          <div class="value">
+            <div class="bar" aria-hidden="true"></div>
+            <h2>Nowoczesne narzędzia</h2>
+            <p class="en" lang="en">Modern tools</p>
+          </div>
+        </div>
+
+        <div class="cta rise rise--5">
+          <a class="btn" href="mailto:kontakt@adamone.edu.pl">
+            Skontaktuj się z nami
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6"/>
+            </svg>
+          </a>
+          <p class="note">
+            kontakt@adamone.edu.pl · <span class="en" lang="en">Get in touch</span>
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer class="site-foot">
+      <div class="shell">
+        <span class="domain">adamone.edu.pl</span>
+        <span>© 2026 AdamOne Edu · Wszelkie prawa zastrzeżone <span class="en" lang="en">· All rights reserved</span></span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
