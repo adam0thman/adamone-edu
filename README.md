@@ -3,6 +3,10 @@
 Bilingual (PL-first, EN subtitles) one-pager announcing the upcoming official
 site at **adamone.edu.pl**. Static — one `index.html`, no build step.
 
+**Live:** https://adam0thman.github.io/adamone-edu/
+(repo `adam0thman/adamone-edu` is public — GitHub Pages on the Free plan
+requires public repos)
+
 ## Local preview
 
 ```sh
