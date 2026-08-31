@@ -11,6 +11,8 @@
   <meta property="og:url" content="https://adamone.edu.pl/" />
   <meta name="theme-color" content="#F0F7F9" />
 
+  <link rel="icon" type="image/svg+xml" href="emblem.svg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
@@ -155,14 +157,10 @@
       text-decoration: none;
       color: inherit;
     }
-    .brand__mark {
-      width: 44px; height: 44px;
+    .brand__emblem {
+      width: 46px; height: 46px;
       flex: none;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--trust-blue), var(--digital-cyan));
-      box-shadow: 0 6px 18px rgba(28, 86, 155, 0.28);
+      filter: drop-shadow(0 6px 14px rgba(28, 86, 155, 0.35));
     }
     .brand__name {
       font-family: var(--font-display);
@@ -424,13 +422,7 @@
     <header class="site-head">
       <div class="shell">
         <a class="brand" href="#" aria-label="AdamOne Edu — strona główna / home">
-          <span class="brand__mark" aria-hidden="true">
-            <!-- simple spark / open-book mark -->
-            <svg width="26" height="26" viewBox="0 0 26 26" fill="none" role="img" aria-hidden="true">
-              <path d="M13 2 L16 10 L24 13 L16 16 L13 24 L10 16 L2 13 L10 10 Z" fill="#fff" opacity="0.95"/>
-              <circle cx="13" cy="13" r="2.4" fill="#00BFA6"/>
-            </svg>
-          </span>
+          <img class="brand__emblem" src="emblem.svg" alt="" width="46" height="46" aria-hidden="true" />
           <span class="brand__name">AdamOne <span class="edu">Edu</span></span>
         </a>
         <span class="lang" aria-label="Strona dwujęzyczna: polski i angielski / Bilingual page: Polish and English">

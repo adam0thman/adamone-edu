@@ -14,6 +14,8 @@ python3 -m http.server 8000
 # → http://localhost:8000
 ```
 
+Brand emblem: `emblem.svg` — A1E seal, used as favicon and header mark.
+
 ## Connecting the domain later (adamone.edu.pl)
 
 1. Repo → Settings → Pages → Custom domain → enter `adamone.edu.pl`, save
